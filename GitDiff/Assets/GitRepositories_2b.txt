@@ -6,4 +6,4 @@ You can only push to two types of url addresses:
 
 An HTTPS URL like https://github.com/user/repo.git
 An SSH URL, like git@github.com:user/repo.git
-Git associates a remote URL with a name, and your default remote is usually called origin.
+GIt associates a remote URL with a name, and your default remote is usually called origin.
