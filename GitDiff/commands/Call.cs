@@ -19,6 +19,7 @@ namespace GitDiff.Classes
                     //checks the command has the correct number of parameters and that the files exist
                     if (splitCommand.Length == 3 && File.Exists($"Assets/{splitCommand[1]}") && File.Exists($"Assets/{splitCommand[2]}"))
                     {
+                        //provides the file path to the diff function
                         diff($"Assets/{splitCommand[1]}", $"Assets/{splitCommand[2]}");
                     }
                     else
@@ -27,10 +28,8 @@ namespace GitDiff.Classes
                     }
                     break;
                 case "help":
-                    Console.WriteLine("diff: Checks the difference between two files, include the file extension.");
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("diff <fileA> <fileB>");
-                    Console.ResetColor();
+                    //calls the help command from commands.cs
+                    help();
                     break;
                 case "dir":
                     break;

@@ -9,59 +9,78 @@ namespace GitDiff.Classes
     class DiffCheck : FileLoad
     {
         private string[] diffLoc;
-        private List<string> changes;
+        private List<string> changes = new List<string> { };
+        public string[] newLine;
 
-        public string[] GetDiffLoc()
-        {
-            return diffLoc;
-        }
-        public List<string> GetChanges()
-        {
-            return changes;
-        }
+        //getters for the difference location and the changes made
+        public string[] GetDiffLoc() => diffLoc;
+        public List<string> GetChanges() => changes;
+        
+
+        //setter to find the changes made between the two provided files
         public void SetChanges(string file1, string file2)
         {
             SetFiles(file1, file2);
             string[] fileArray1 = GetFile1();
             string[] fileArray2 = GetFile2();
-            
             List<String> remove = new List<string>();
             List<String> add = new List<string>();
-            foreach (var i in fileArray1)
+
+            //adds the values of both file arrays to a list to allow for easier use
+            foreach (var item in fileArray1)
             {
-                remove.Add(i);
+                remove.Add(item);
+                //Console.WriteLine(remove.First());
             }
-            foreach (var i in fileArray2)
+            foreach (var item in fileArray2)
             {
-                add.Add(i);
+                add.Add(item);
             }
-            string[] addOrRemove = new string[add.Count+remove.Count];
-            int j = 0;
-            while (j < fileArray1.Length || j < fileArray2.Length)
+
+
+
+
+
+            /*int i = 0;
+            while (i < fileArray1.Length || i < fileArray2.Length)
             {
-                string[] addSplitter = add[j].Split();
-                string[] removeSplitter = remove[j].Split();
-                int helpme = 0;
+                //splits the two files into individual words
+                string[] addSplitter = add[i].Split(new char[] { ',', ' ' });
+                string[] removeSplitter = remove[i].Split(new char[] { ',', ' ' });
+                int j = 0;
                 
-                //Console.WriteLine(addSplitter[j], removeSplitter[j]);
-                IEnumerable<string> notInTwo = removeSplitter.Except(addSplitter);
-                IEnumerable<string> notInOne = addSplitter.Except(removeSplitter);
-                while (helpme < notInOne.Count() || helpme < notInTwo.Count())
+                //checks for members of the array that are not in the other array
+                while (j < addSplitter.Length && j < removeSplitter.Length)
                 {
-                    if (Array.IndexOf(removeSplitter, notInOne.ElementAt(helpme)) == -1)
+                    if (Array.IndexOf(addSplitter, removeSplitter[j]) == -1)
                     {
-                        if (helpme < notInOne.Count() && helpme < notInTwo.Count())
+                        int x = 1;
+                        changes.Add(addSplitter[j]);
+                        //Checks for additional words in order to include them in the changes
+                        while (Array.IndexOf(removeSplitter, addSplitter[j + x]) == -1)
                         {
-                            Console.WriteLine(notInOne.ElementAt(helpme));
-                            Console.WriteLine(notInTwo.ElementAt(helpme));
-                            changes.Add(notInOne.ElementAt(helpme));
-                            changes.Add(notInTwo.ElementAt(helpme));
+                            if (addSplitter.Length > removeSplitter.Length)
+                            {
+                                changes.Add(addSplitter[j + x]);
+                            }
+                            x++;
+                        }
+                        changes.Add(removeSplitter[j]);
+                        x = 1;
+                        while (Array.IndexOf(addSplitter, removeSplitter[j + x]) == -1)
+                        {
+                            if (removeSplitter.Length > addSplitter.Length)
+                            {
+                                changes.Add(removeSplitter[j + x]);
+                            }
+                            //changes.Add(removeSplitter[j + x]);
+                            x++;
                         }
                     }
-                    helpme++;
+                    j++;
                 }
-                j++;
-            }
+                i++;
+            }*/
         }
     }
 }
