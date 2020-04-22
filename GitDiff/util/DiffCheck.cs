@@ -44,39 +44,42 @@ namespace GitDiff.Classes
                 string[] addSplitter = add[i].Split(new char[] { ',', ' ' });
                 string[] removeSplitter = remove[i].Split(new char[] { ',', ' ' });
                 int j = 0;
-                
+                int x = 0;
+                int x2 = 0;
                 //checks for members of the array that are not in the other array
                 while (j < addSplitter.Length && j < removeSplitter.Length)
                 {
                     int changeNum = 0;
                     if (Array.IndexOf(addSplitter, removeSplitter[j]) == -1 || Array.IndexOf(removeSplitter, addSplitter[j]) == -1)
                     {
-                        if (addSplitter.Length == removeSplitter.Length)
+                        /*if (addSplitter.Length == removeSplitter.Length)
                         {
                             changes.Add(addSplitter[j]);
                             changes.Add(removeSplitter[j]);
-                        }
-                        int x = 0;
+                        }*/
+                        
                         //changes.Add(addSplitter[j]);
                         //Checks for additional words in order to include them in the changes
                         while (Array.IndexOf(removeSplitter, addSplitter[j + x]) == -1)
                         {
-                            if (addSplitter.Length> removeSplitter.Length)
+                            //Console.WriteLine(addSplitter[j + x]);
+                            changes.Add(addSplitter[j + x]);
+                            /*if (addSplitter.Length> removeSplitter.Length)
                             {
-                                changes.Add(addSplitter[j + x]);
-                            }
+                                
+                            }*/
                             x++;
                         }
-                        //changes.Add(removeSplitter[j]);
-                        x = 0;
-                        while (Array.IndexOf(addSplitter, removeSplitter[j + x]) == -1)
+                        
+                        while (Array.IndexOf(addSplitter, removeSplitter[j + x2]) == -1)
                         {
-                            if (removeSplitter.Length > addSplitter.Length)
+                            //Console.WriteLine(removeSplitter[j + x2]);
+                            changes.Add(removeSplitter[j + x2]);
+                            /*if (removeSplitter.Length > addSplitter.Length)
                             {
-                                changes.Add(removeSplitter[j + x]);
-                            }
-                            //changes.Add(removeSplitter[j + x]);
-                            x++;
+                                
+                            }*/
+                            x2++;
                         }
                     }
                     j++;
