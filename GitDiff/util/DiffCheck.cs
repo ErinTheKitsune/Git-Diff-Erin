@@ -37,11 +37,7 @@ namespace GitDiff.Classes
                 add.Add(item);
             }
 
-
-
-
-
-            /*int i = 0;
+            int i = 0;
             while (i < fileArray1.Length || i < fileArray2.Length)
             {
                 //splits the two files into individual words
@@ -52,21 +48,27 @@ namespace GitDiff.Classes
                 //checks for members of the array that are not in the other array
                 while (j < addSplitter.Length && j < removeSplitter.Length)
                 {
-                    if (Array.IndexOf(addSplitter, removeSplitter[j]) == -1)
+                    int changeNum = 0;
+                    if (Array.IndexOf(addSplitter, removeSplitter[j]) == -1 || Array.IndexOf(removeSplitter, addSplitter[j]) == -1)
                     {
-                        int x = 1;
-                        changes.Add(addSplitter[j]);
+                        if (addSplitter.Length == removeSplitter.Length)
+                        {
+                            changes.Add(addSplitter[j]);
+                            changes.Add(removeSplitter[j]);
+                        }
+                        int x = 0;
+                        //changes.Add(addSplitter[j]);
                         //Checks for additional words in order to include them in the changes
                         while (Array.IndexOf(removeSplitter, addSplitter[j + x]) == -1)
                         {
-                            if (addSplitter.Length > removeSplitter.Length)
+                            if (addSplitter.Length> removeSplitter.Length)
                             {
                                 changes.Add(addSplitter[j + x]);
                             }
                             x++;
                         }
-                        changes.Add(removeSplitter[j]);
-                        x = 1;
+                        //changes.Add(removeSplitter[j]);
+                        x = 0;
                         while (Array.IndexOf(addSplitter, removeSplitter[j + x]) == -1)
                         {
                             if (removeSplitter.Length > addSplitter.Length)
@@ -80,7 +82,7 @@ namespace GitDiff.Classes
                     j++;
                 }
                 i++;
-            }*/
+            }
         }
     }
 }
